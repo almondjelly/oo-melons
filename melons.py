@@ -1,5 +1,6 @@
 """Classes for melon orders."""
 
+
 class AbstractMelonOrder(object):
     """An abstract base class that other Melon Orders inherit from."""
 
@@ -15,7 +16,7 @@ class AbstractMelonOrder(object):
     def get_total(self):
         """Calculate price, including tax."""
 
-        base_price = 5
+        base_price = 5 * 1.5
 
         if self.order_type == 'international' and self.qty < 10:
             fee = 3
