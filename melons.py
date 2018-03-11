@@ -1,3 +1,6 @@
+from random import randint
+import datetime
+
 """Classes for melon orders."""
 
 
@@ -16,7 +19,7 @@ class AbstractMelonOrder(object):
     def get_total(self):
         """Calculate price, including tax."""
 
-        base_price = 5
+        base_price = self.get_base_price()
         fee = 0
 
         if self.species == 'Christmas':
@@ -30,6 +33,17 @@ class AbstractMelonOrder(object):
         """Record the fact than an order has been shipped."""
 
         self.shipped = True
+
+    def get_base_price(self):
+        """Calculate base price based on Splurge pricing, rush hour."""
+
+        base_price = randint(5, 9)
+
+        if datetime.time.hour >= 8 and datetime.time.hour < 11 \
+           and datetime.date.weekday() <= 4:
+            return 4 + base_price
+        else:
+            return base_price
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
